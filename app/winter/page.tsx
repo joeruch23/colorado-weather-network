@@ -1,5 +1,6 @@
 
-import resorts from "@/app/api/winter/resorts.json";
+import resorts from "../api/winter/resorts.json";
+
 
 async function getResortSnow(lat:number, lon:number) {
   const r = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/winter/snow?lat=${lat}&lon=${lon}`, { cache: "no-store" });
