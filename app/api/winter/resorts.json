@@ -1,0 +1,100 @@
+[
+  {
+    "id": "arapahoe_basin",
+    "name": "Arapahoe Basin",
+    "lat": 39.642,
+    "lon": -105.871,
+    "elev_m": 3289
+  },
+  {
+    "id": "breckenridge",
+    "name": "Breckenridge",
+    "lat": 39.481,
+    "lon": -106.066,
+    "elev_m": 2926
+  },
+  {
+    "id": "copper",
+    "name": "Copper Mountain",
+    "lat": 39.501,
+    "lon": -106.151,
+    "elev_m": 2960
+  },
+  {
+    "id": "keystone",
+    "name": "Keystone",
+    "lat": 39.606,
+    "lon": -105.942,
+    "elev_m": 2835
+  },
+  {
+    "id": "loveland",
+    "name": "Loveland",
+    "lat": 39.68,
+    "lon": -105.897,
+    "elev_m": 3243
+  },
+  {
+    "id": "eldora",
+    "name": "Eldora",
+    "lat": 39.937,
+    "lon": -105.582,
+    "elev_m": 2896
+  },
+  {
+    "id": "steamboat",
+    "name": "Steamboat",
+    "lat": 40.457,
+    "lon": -106.804,
+    "elev_m": 2103
+  },
+  {
+    "id": "vail",
+    "name": "Vail",
+    "lat": 39.606,
+    "lon": -106.355,
+    "elev_m": 2485
+  },
+  {
+    "id": "beaver_creek",
+    "name": "Beaver Creek",
+    "lat": 39.604,
+    "lon": -106.517,
+    "elev_m": 2469
+  },
+  {
+    "id": "aspen_snowmass",
+    "name": "Aspen Snowmass",
+    "lat": 39.208,
+    "lon": -106.949,
+    "elev_m": 2473
+  },
+  {
+    "id": "monarch",
+    "name": "Monarch",
+    "lat": 38.512,
+    "lon": -106.331,
+    "elev_m": 3170
+  },
+  {
+    "id": "telluride",
+    "name": "Telluride",
+    "lat": 37.936,
+    "lon": -107.846,
+    "elev_m": 2700
+  },
+  {
+    "id": "purgatory",
+    "name": "Purgatory",
+    "lat": 37.627,
+    "lon": -107.814,
+    "elev_m": 2683
+  },
+  {
+    "id": "wolf_creek",
+    "name": "Wolf Creek",
+    "lat": 37.474,
+    "lon": -106.793,
+    "elev_m": 3240
+  }
+]
