@@ -3,24 +3,35 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid gap-6 md:grid-cols-2">
-      <section className="card">
-        <h2 className="font-semibold mb-2">right now</h2>
-        <p className="text-sm">Auto-locate + current conditions (coming next)</p>
-        <div className="mt-3 text-sm muted">Using Open-Meteo free API.</div>
+    <div className="space-y-6">
+      <section className="gradient rounded-3xl p-6">
+        <h1 className="text-2xl font-semibold">colorado weather network</h1>
+        <p className="text-white/90 mt-1 text-sm">
+          live radar • alerts • roads • snow • severe — built for colorado
+        </p>
+        <div className="mt-4 flex gap-2">
+          <Link href="/radar" className="btn bg-white text-slate-900 hover:bg-slate-100">open radar</Link>
+          <Link href="/currents" className="btn">your conditions</Link>
+        </div>
       </section>
-      <section className="card">
-        <h2 className="font-semibold mb-2">live radar</h2>
-        <p className="text-sm">See <Link href="/radar" className="underline">radar</Link> for the embedded national radar (temporary).</p>
-      </section>
-      <section className="card">
-        <h2 className="font-semibold mb-2">travel</h2>
-        <p className="text-sm">CDOT closures, incidents and cameras on <Link href="/roads" className="underline">roads</Link>.</p>
-      </section>
-      <section className="card">
-        <h2 className="font-semibold mb-2">winter hub</h2>
-        <p className="text-sm">Snow reports (24h/72h via Open-Meteo) on <Link href="/winter" className="underline">winter</Link>.</p>
-      </section>
+
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="card">
+          <div className="section-title mb-2">alerts</div>
+          <p className="text-sm">Active watches/warnings/advisories for Colorado from NWS CAP.</p>
+          <div className="mt-3"><Link href="/alerts" className="btn">view alerts</Link></div>
+        </div>
+        <div className="card">
+          <div className="section-title mb-2">winter</div>
+          <p className="text-sm">24h/72h model snowfall for major resorts. Official reports may differ.</p>
+          <div className="mt-3"><Link href="/winter" className="btn">snow reports</Link></div>
+        </div>
+        <div className="card">
+          <div className="section-title mb-2">roads</div>
+          <p className="text-sm">CDOT closures, incidents and cameras. Requires API key to populate.</p>
+          <div className="mt-3"><Link href="/roads" className="btn">open roads</Link></div>
+        </div>
+      </div>
     </div>
   );
 }

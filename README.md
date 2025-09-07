@@ -1,29 +1,26 @@
 
-# Colorado Weather Network — No-Ads Starter (Free-Tier Ready)
+# Colorado Weather Network — Polished (No Ads)
 
-**Included:** Next.js 14 + TS + Tailwind, NWS alerts, Currents (Open-Meteo), Winter (model snow), CDOT stubs for closures/cameras, Severe quick-links, Radar embed.
-
-## Accounts (free)
-- GitHub, Vercel
-- Optional keys later: CDOT API key
-
-## Deploy
-1) Push to GitHub → Vercel → New Project → Deploy.
-2) Set env vars in Vercel → Settings → Environment Variables:
-   - `NEXT_PUBLIC_BASE_URL=https://<your-project>.vercel.app`
-   - `CDOT_API_KEY=` (optional for now)
-3) Redeploy automatically.
+A clean, production-friendly Next.js 14 starter for Colorado weather.
+- Polished Tailwind UI (hero, cards, sticky nav)
+- **No env vars needed** for core pages
+- Server components fetch upstream data directly (NWS CAP, Open‑Meteo)
+- Avoids relative `/api` fetches to prevent server errors on Vercel
 
 ## Pages
-- `/radar` — NWS national radar (temporary). Replace with MapLibre later.
-- `/alerts` — Active Colorado CAP alerts.
-- `/currents` — Geolocate and show current conditions (Open-Meteo).
-- `/winter` — Derived snow totals (24h/72h) for major resorts.
-- `/roads` — CDOT closures/incidents + cameras (requires `CDOT_API_KEY`).
-- `/severe` — SPC quick-links + CAP watches/warnings list.
-- `/cameras` — CDOT cameras grid (requires `CDOT_API_KEY`).
+- `/` — Hero + quick links
+- `/radar` — NWS national radar embed (swap to MapLibre later)
+- `/alerts` — Active CO alerts (NWS CAP)
+- `/severe` — SPC quick links + active CO WW
+- `/currents` — Client: geolocate + Open‑Meteo current weather
+- `/winter` — Model-derived 24h/72h snowfall for major CO resorts
 
-## Notes
-- CDOT endpoints in `/api/cdot/*` are placeholders; paste the real endpoints from your CDOT docs.
-- Avalanche (CAIC) can be added next; we kept it out here to keep things clean without ads.
-- For Open-Meteo units, snowfall returns cm; convert to inches by multiplying 0.3937 if you prefer.
+## Deploy (Vercel Hobby)
+1) Push to GitHub (ensure `app/` and `public/` at repo root)
+2) Import repo at https://vercel.com/new → Deploy
+3) Done. No env vars required
+
+## Next steps
+- Add CDOT closures/cameras (needs API key & endpoints)
+- Add CAIC avalanche zones and danger ratings
+- Replace radar with MapLibre + tiles for animation

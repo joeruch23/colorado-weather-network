@@ -1,6 +1,10 @@
 
 async function getAlerts() {
-  const r = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/alerts`, { cache: "no-store" });
+  const r = await fetch("https://api.weather.gov/alerts/active?area=CO", {
+    headers: { "User-Agent": "ColoradoWeatherNetwork (demo)" },
+    next: { revalidate: 300 }
+  });
+  if (!r.ok) return { features: [] };
   return r.json();
 }
 
@@ -10,10 +14,10 @@ export default async function SeverePage() {
   const ww = feats.filter((f:any)=>/Watch|Warning/i.test(f?.properties?.event || ""));
 
   return (
-    <div className="grid gap-6">
+    <div className="space-y-6">
       <section className="card">
-        <h1 className="font-semibold mb-2">severe weather (SPC & NWS)</h1>
-        <p className="text-sm mb-2">Quick links to SPC outlooks (opens in a new tab):</p>
+        <h1 className="font-semibold mb-2">severe weather</h1>
+        <p className="text-sm mb-2">Official SPC quick links (open in new tab):</p>
         <ul className="text-sm list-disc ml-5">
           <li><a className="underline" target="_blank" href="https://www.spc.noaa.gov/products/outlook/">SPC Day 1–8 Outlooks</a></li>
           <li><a className="underline" target="_blank" href="https://www.spc.noaa.gov/exper/">Mesoanalysis</a></li>
@@ -23,7 +27,7 @@ export default async function SeverePage() {
       </section>
 
       <section className="card">
-        <h2 className="font-semibold mb-2">active watches/warnings in Colorado (CAP)</h2>
+        <h2 className="font-semibold mb-2">active watches/warnings (CO)</h2>
         {ww.length === 0 ? <p className="text-sm">None active.</p> : (
           <ul className="space-y-2 text-sm">
             {ww.map((f:any)=>(
