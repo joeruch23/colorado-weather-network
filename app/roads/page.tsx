@@ -54,7 +54,7 @@ function flatten(feats: any[], kindLabel: string) {
           impact: props?.impact || props?.advisory || props?.severity,
           updated: props?.lastUpdated || props?.updateTime,
           props,
-          link: f.uri ? \`https://maps.cotrip.org\${f.uri}\` : undefined
+          link: f.uri ? `https://maps.cotrip.org${f.uri}` : undefined
         });
       }
     } else {
@@ -62,7 +62,7 @@ function flatten(feats: any[], kindLabel: string) {
         id: f?.uri || Math.random().toString(36).slice(2),
         kind: kindLabel,
         name: f?.tooltip || "Road item",
-        link: f?.uri ? \`https://maps.cotrip.org\${f.uri}\` : undefined
+        link: f?.uri ? `https://maps.cotrip.org${f.uri}` : undefined
       });
     }
   }
@@ -149,20 +149,34 @@ export default async function RoadsPage() {
 
       <div className="card">
         <h2 className="font-semibold mb-2">Travel-related Alerts (NWS CAP—Colorado)</h2>
-        {alerts.length === 0 ? (
-          <p className="text-sm">No active winter/high-wind/audience travel alerts.</p>
-        ) : (
-          <ul className="space-y-2 text-sm">
-            {alerts.map((f:any)=>(
-              <li key={f.id} className="border rounded-lg p-2">
-                <div className="font-semibold">{f.properties.event}</div>
-                <div className="muted text-xs">{f.properties.headline}</div>
-                <div className="text-xs mt-1">{f.properties.areaDesc}</div>
-                <a className="underline text-xs" href={f.properties?.["@id"] || f.id} target="_blank" rel="noreferrer">details</a>
-              </li>
-            ))}
-          </ul>
-        )}
+        {/* We re-run the same CAP query here for simplicity */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* This inner component is simple enough to keep in the same file */}
+        {await (async () => {
+          const r = await fetch("https://api.weather.gov/alerts/active?area=CO", {
+            headers: { "User-Agent": "ColoradoWeatherNetwork (roads-hotfix)" },
+            next: { revalidate: 300 }
+          });
+          const ok = r.ok;
+          const j = ok ? await r.json() : null;
+          const feats = ok && Array.isArray(j?.features) ? j.features : [];
+          const travelTerms = /(Winter|Blizzard|Snow|Ice|High Wind|Dust|Avalanche)/i;
+          const alerts = feats.filter((f:any)=> travelTerms.test(f?.properties?.event || ""));
+          return alerts.length === 0 ? (
+            <p className="text-sm">No active winter/high-wind/audience travel alerts.</p>
+          ) : (
+            <ul className="space-y-2 text-sm">
+              {alerts.map((f:any)=>(
+                <li key={f.id} className="border rounded-lg p-2">
+                  <div className="font-semibold">{f.properties.event}</div>
+                  <div className="muted text-xs">{f.properties.headline}</div>
+                  <div className="text-xs mt-1">{f.properties.areaDesc}</div>
+                  <a className="underline text-xs" href={f.properties?.["@id"] || f.id} target="_blank" rel="noreferrer">details</a>
+                </li>
+              ))}
+            </ul>
+          );
+        })()}
       </div>
     </div>
   );
