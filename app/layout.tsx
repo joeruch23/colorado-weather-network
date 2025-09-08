@@ -1,5 +1,6 @@
 
 import "./globals.css";
+import ChatWidget from "@/components/ChatWidget";
 import Link from "next/link";
 
 export const metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="container py-10 text-sm text-slate-500">
           © {new Date().getFullYear()} Colorado Weather Network — data: NWS/NOAA, Open‑Meteo, CDOT (where available).
         </footer>
+        <ChatWidget />
       </body>
     </html>
   );
